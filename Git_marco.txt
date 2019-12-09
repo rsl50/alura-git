@@ -1,0 +1,273 @@
+GIT E GITHUB:  CONTROLE E COMPARTILHE SEU CODIGO
+================================================
+
+1 - O QUE É GIT
+===============
+O GIT é um VCS (Version Control System).
+Nos ajudam a manter um histórico de alterações;
+Nos ajudam a ter controle sobre cada alteração no código;
+Nos ajudam para que uma alteração de determinada pessoa não influencie na
+ alteração realizada por outra;
+
+Site do Git para instalação:
+https://git-scm.com/
+
+> git init
+O git init inicializa um repositório no diretório em que o comando for executado.
+A partir deste comando, o Git poderá gerenciar as modificações realizadas nos arquivos.
+
+>git status
+Comando dentro do diretório inicializado.
+Mostra a atual situação do Git.
+
+2 - INICIANDO OS TRABALHOS
+==========================
+> git status
+Resultado:
+HEAD: Estado atual do nosso código, ou seja, onde o Git nos colocou
+Working tree: Local onde os arquivos realmente estão sendo armazenados e editados
+index: Local onde o Git armazena o que será commitado, ou seja, o local entre a working tree e o repositório Git em si.
+
+Possíveis estados dos arquivos explicados:
+https://git-scm.com/book/pt-br/v1/Git-Essencial-Gravando-Altera%C3%A7%C3%B5es-no-Reposit%C3%B3rio
+
+Configurações do Git
+--------------------
+Completo: https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+Exemplo: Nome do usuário local.
+> git config --local user.name "Nome da pessoa"
+
+Consultar:
+> git config user.name
+
+Git Log:
+--------
+Visualizar alterações no diretório:
+> git log
+Git Log CheatSheet: https://devhints.io/git-log
+
+Exercicio da Aula:
+------------------
+1) No diretório do Exercicio
+  > git add index.html
+  > git status
+2) Realizar commit
+  > git commit -m "Criando arquivo index.html com lista de cursos"
+3) Altera arquivo
+4) Consultar:
+  > git status
+5) É necessário incluir de novo o arquivo(?)
+6) Incluir todos os arquivos:
+  > git add .
+7) Novo commit
+8) Executar git status para observar a saída.
+Execute também git log --oneline, git log -p e outras alternativas.
+9) Crie um arquivo vazio com o nome que quiser, por exemplo, ide-config;
+10) Crie o arquivo .gitignore e adicione uma linha com o arquivo recém-criado
+11) Execute git status e verifique que o arquivo ide-config não está na lista
+para ser adicionado;
+12) Adicione
+> git add .gitignore
+Realize o commmit
+> git commit -m "Adicionando .gitignore"
+
+Remover um arquivo:
+> git rm --cached index.html
+
+Resumo Aula:
+Um commit é a forma de salvar um estado ou versão do nosso código;
+Como adicionar arquivos para serem commitados com git add;
+Como commitar arquivos, utilizando o comando git commit;
+Como verificar o histórico de commits, através do git log
+git log --oneline
+git log -p
+git log --pretty="parametros de formatação"
+Como fazer o Git não monitorar arquivos, através do .gitignore
+Que não devemos realizar commit, ou seja, salvar um estado, da nossa aplicação
+ não funcionando.
+
+3 - COMPARTILHANDO O TRABALHO
+=============================
+Para criar um repositório remoto onde possamos enviar alterações
+e que outros possam acessar estas alterações (apenas receber push e pull):
+Dentro do dir criado:
+> git init --bare
+
+--bare - E um repositorio apenas para enviar e receber arquivos.
+
+Na pasta de trabalho adicionar um nome e caminho para o repositório:
+> git remote add nome-repositorio caminho/para/o/repositorio
+
+Exemplo:
+c:/Users/Alura/Documents/git-e-github/servidor/
+Em alguns casos o bash só aceita o formato:
+/c/Users/Alura/Documents/git-e-github/servidor/
+
+Para consultar os repositórios configurados:
+> git remote
+> git remote -v
+
+Para renomear um repositório:
+> git remote rename origin local
+
+Para remover um repositorio:
+> git remote rm [nome-repositorio]
+
+Para enviar nossos dados ao repositório mesmo que primeira vez:
+> git push [repositorio] master
+Exemplo:
+> git push local master
+
+Para clonar, trazer pela primeira vez os dados do repositório.
+Pasta Ana
+> git clone /c/Users/ALURA/Documents/git-e-github/servidor/projeto
+OU
+> git pull [repositorio] master
+
+Criada nova conta public no Github
+----------------------------------
+HTTPS:
+------
+Quick Setup: https://github.com/xbrevi/site.git
+echo "# site" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/xbrevi/site.git
+git push -u origin master
+git remote add origin https://github.com/xbrevi/site.git
+git push -u origin master
+
+SSH:
+----
+Quick Setup: git@github.com:xbrevi/site.git
+echo "# site" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:xbrevi/site.git
+git push -u origin master
+git remote add origin git@github.com:xbrevi/site.git
+git push -u origin master
+
+Trocar/Remover o usuário do Github:
+Control Panel -> User Accounts -> Manage your credentials -> Windows Credentials
+Under Generic Credentials there are some credentials related to Github.
+Click on them and click "Remove".
+
+4 - TRABALHANDO EM EQUIPE:
+==========================
+Separação dos ramos (branches) de desenvolvimento.
+
+Criar novo branch:
+> git branch titulo
+
+Consultar:
+> git branch
+
+Para mudar o branch:
+> git chechout titulo
+
+Unindo o trabalho:
+------------------
+Para dar um merge:
+No branch master:
+> git merge titulo
+
+Ou Rebase:
+No branch master:
+> git rebase titulo
+
+O merge junta os trabalhos e gera um merge commit.
+O rebase aplica os commits de outra branch na branch atual.
+Há uma longa discussão sobre o que é "melhor": rebase ou merge.
+Artigo que cita o assunto:
+https://medium.com/datadriveninvestor/git-rebase-vs-merge-cc5199edd77c
+
+Visualizar
+> git log --graph
+
+Apagar o branch:
+----------------
+Local:
+> git branch -d branch_name
+Remoto:
+> git push <remote_name> --delete <branch_name>
+
+Resumo Aula:
+------------
+- Uma branch (ou ramo) é uma linha de commits separada.
+- Como trazer o trabalho realizado em uma branch para outra branch, como por exemplo, o master, através do comando git merge;
+- Que o git merge gera um novo commit, informando que houve uma mescla entre duas branches;
+- Como trazer os commits de uma branch para outra, com o git rebase
+- Que o git rebase não gera um commit de merge, simplificando o nosso log;
+- Como os conflitos são apresentados pelo Git;
+- Como resolver os conflitos e manter apenas as alterações desejadas com o Git.
+
+5 - MANIPULANDO AS VERSÕES
+==========================
+REVERTER ALTERAÇÕES E COMMIT:
+-----------------------------
+Desfazer alteração realizada localmente em um arquivo.
+Obs: Arquivo ainda não enviado para o STAGE:
+> git checkout -- qr302d.php
+
+Remover o arquivo do STAGE:
+Antes:
+> git add qr302d.php
+Remover do STAGE:
+> git reset HEAD qr302d.php
+
+Reverter alteração já commitada:
+> git revert {hash}
+
+STASH - RASCUNHO
+----------------
+Salvar alterações temporarias:
+> git stash
+Para ver a lista de stashes
+> git stach list
+Para entrar no stash:
+> git checkout {hash}
+Apenas primeiras 7 caracteres do hash
+O git nos leva a um ambiente desacoplado para fazer experiências, mas não vai
+salvar nenhum commit.
+Para remover um stash:
+> git stash drop <numero>
+Para tal é necessário criar um novo brach:
+> git checkout -b <new-branch-name>
+
+VIAJANDO NO TEMPO:
+------------------
+Para ver os commits de forma resumida:
+> git log --oneline
+Acesse o ponto de commit desejado:
+> git checkout {hash}
+Execute para voltar a linha master de desenvolvimento
+> git checkout master
+
+6 - MANIPULANDO AS VERSÕES
+==========================
+Lembrete consultar log:
+> git log --oneline
+
+Ver diferença de um commit a outro:
+> git diff {hash}..{hash}
+
+Criar tag da Versão/Release:
+> git tag -a v0.1.0 -m "Lançamento da Primeira Versão"
+
+Consultar:
+> git tag
+
+Subir tag:
+> git push origin v0.1.0
+
+Nesta aula, aprendemos:
+Que é possível visualizar quais alterações foram realizadas em cada arquivo, com o comando git diff;
+Que, digitando apenas git diff, vemos as alterações em nossos arquivos que não foram adicionadas para commit (com git add);
+Que é possível comparar as alterações entre duas branches com git diff <branch1>..<branch2>
+Que é possível comparar as alterações feitas entre um commit e outro, através do comando git diff <commit1>..<commit2>;
+Que o Git nos possibilita salvar marcos da nossa aplicação, como por exemplo, lançamento de versões, através do git tag;
+Que o comando git tag -a é utilizado para gerar uma nova tag;
+As Releases do GitHub, que são geradas para cada tag do Git criada em nosso repositório.

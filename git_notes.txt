@@ -1,0 +1,62 @@
+git config --local user.name "Robson Lima"
+git config --local user.email "rsl.robson@gmail.com"
+rsl50
+bygbwurt6m0363sm3eh4u6nj0hjw80gk
+
+git init - Informa o git que a pasta atual é um repositório. Inicializa um repositório.
+git status - Mostra o status atual do repositório
+git add - Adiciona arquivo ao monitoramento do repositório
+git commit -m "mensagem descritiva" - Salvar modificações no repositório
+git log - Mostra o histórico do repositório
+git config --local user.name "nome" - Configura o nome do autor para o repositório local
+git config --local user.email "email" - Configura o nome do autor para o repositório local
+gif config user.name - Retorna o nome configurado no config
+git log --oneline - Exibe log reduzido
+
+Devemos gerar um commit sempre que a nossa base de código está em um estado do qual gostaríamos de nos lembrar. Nunca devemos ter commits de códigos que não funcionam, mas também não é interessante deixar para commitar apenas no final de uma feature.
+
+Como verificar o histórico de commits, através do git log e algumas de suas opções:
+git log --oneline
+git log -p
+git log --pretty="parametros de formatação"
+
+git init --bare - Cria um repositório para armazenar apenas as alterações dos arquivos e não a cópia dos arquivos.
+Com este comando nós criamos um repositório que não terá a working tree, ou seja, não conterá uma cópia dos nossos arquivos. Como o repositório servirá apenas como servidor, para que outros membros da equipe sincronizem seus trabalhos, poupamos espaço de armazenamento desta forma.
+
+git remote add nome-repositorio caminho/para/o/repositorio - Adiciona um repositório remoto
+ex. git remote add local C:/Users/robson/Desktop/servidor-git/
+
+git remote - Lista os repositórios remotos
+git remote -v - Detalha o caminho do repositório remoto
+git clone "endereço completo do repositorio" "pasta destino" - Clona todo o repositório para a pasta atual
+
+git clone traz um repositório remoto para o nosso computador, criando um repositório local.
+
+git push local master - Envia os arquvios do branch master para o repositório 
+git remote rename origin local - Altera o nome do repositório
+git pull local master - Puxa os arquivos do branch master do repositório
+
+git branch - Exibe os branches do repositório
+git branch nome-branch - Cria um novo branch
+git checkout nome-branch - Muda para o branch nome-branch
+git checkout -b nome-branch - Sai do branch atual, cria e muda para o nome-branch
+
+git merge nome-branch - Trazer o trabalho realizado em uma branch para outra branch, como por exemplo, o master. Gera um commit de merge.
+git rebase nome-branch - Copia os commits de nome-branch para o master/branch atual sem fazer merge
+
+git checkout -- <arquivo.extensao> - Desfaz a última alteração feita em arquivo antes do commit
+git reset HEAD <arquivo> /git restore --staged <arquivo.extensao> - Desfaz o git add de arquivo
+git revert hash - Desfaz o commit de hash, gerando um novo commit informando que alterações foram desfeitas
+git stash - Faz uma cópia temporária das alterações, sem fazer commit
+git stash list - Permite ver a listagem das alterações temporárias armazenadas
+git stash apply numero-alteracao - Aplica a alteração na posição numero-alteracao 
+git stash drop numero-alteracao - Remove a alteração na posição numero-alteracao 
+git stash pop - Aplica com merge e remove a última alteração que foi adicionada na stash
+
+git diff <commit1>..<commit2> - Permite comparar as alterações feitas entre um commit e outro
+git diff <branch1>..<branch2> - Permite comparar as alterações entre duas branches
+git diff - Vemos as alterações em nossos arquivos que não foram adicionadas para commit (com git add)
+
+git tag -a <nome-tag> -m "mensagem-da-tag" - Cria uma tag <nome-tag> com uma mensagem "mensagem-da-tag"
+git tag - Lista as tags criadas
+git push origin v0.1.0 - Envia a tag v0.1.0 para o GitHub, gerando assim um release. As Releases do GitHub, que são geradas para cada tag do Git criada em nosso repositório.
